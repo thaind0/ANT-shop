@@ -1,0 +1,20 @@
+{
+  "name": "ant-shop",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/thaind0/ANT-shop.git",
+  "author": "ThaiND",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "hbs": "^4.2.0",
+    "mongodb": "^4.13.0"
+  }
+}
