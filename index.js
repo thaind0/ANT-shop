@@ -6,6 +6,7 @@ const app = express();
 
 app.set("view engine", "hbs");
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
 app.get("/", async (req, res) => {
   const db = await getDB();
