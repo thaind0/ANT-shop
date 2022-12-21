@@ -2,18 +2,20 @@ import express from "express";
 import Product from "../models/Product.js";
 import {
   getProducts,
+  getProduct,
   createProduct,
 } from "../controllers/productController.js";
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const products = await getProducts();
-  console.log(products);
-  res.render("products/index", { products });
+  const id = req.query.id;
+  const product = await getProduct(id);
+  console.log(product);
+  res.render("product/index", { product });
 });
 
 router.get("/create", (req, res) => {
-  res.render("products/create");
+  res.render("product/create");
 });
 
 router.post("/create", async (req, res) => {
@@ -23,8 +25,9 @@ router.post("/create", async (req, res) => {
   product.price = req.body.price;
   product.image = req.body.image;
 
-  await createProduct(product);
-  res.redirect("/products");
+  const id = (await createProduct(product)).insertedId.toString();
+  //   id as query string
+  res.redirect(`/product/?id=${id}`);
 });
 
 export default router;

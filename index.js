@@ -10,11 +10,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.get("/", async (req, res) => {
-  // const products = await getProducts();
-  res.render("index");
+  const products = await getProducts();
+  res.render("index", { products });
 });
 
-app.use("/products", productRouter);
+app.use("/product", productRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
