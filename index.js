@@ -1,6 +1,7 @@
 import express from "express";
-import getDB from "./models/index.js";
 import { PORT } from "./config.js";
+import { getProducts } from "./controllers/productController.js";
+import productRouter from "./routers/productRouter.js";
 
 const app = express();
 
@@ -9,9 +10,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.get("/", async (req, res) => {
-  const db = await getDB();
+  // const products = await getProducts();
   res.render("index");
 });
+
+app.use("/products", productRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

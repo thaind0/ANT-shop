@@ -7,19 +7,30 @@
     <title>ANT toy shop</title>
   </head>
   <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <h1>ANT toy shop</h1>
-        </div>
+    <header class="flex flex-row items-center justify-between p-3 shadow">
+      <div class="flex flex-col">
+        <h1 class="text-4xl font-bold">ANT toy shop</h1>
       </div>
-      <div class="row">
-        <div>
-          <h1 class="text-xs font-bold underline text-blue-400">
-            Hello world!
-          </h1>
-        </div>
+      <div class="flex flex-row items-center justify-center gap-4">
+        <a href="/products">
+          <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Product
+          </button>
+        </a>
+        <a href="/products/create">
+          <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            New Product
+          </button>
+        </a>
       </div>
-    </div>
+      <div class="flex flex-col">
+        {{! <a href="/cart" class="text-sm">Cart</a>
+        <a href="/login" class="text-sm">Login</a> }}
+      </div>
+    </header>
   </body>
 </html>
