@@ -16,12 +16,14 @@ router.get("/", async (req, res) => {
   const id = req.query.id;
   const product = await getProduct(id);
   const role = req.session.user ? req.session.user.role : "";
-  console.log(product);
+
   res.render("product/index", { product, role });
 });
 
 router.get("/create", isAuthorized, (req, res) => {
-  res.render("product/create");
+  const role = req.session.user ? req.session.user.role : "";
+
+  res.render("product/create", { role });
 });
 
 router.post("/create", async (req, res) => {
@@ -39,7 +41,9 @@ router.post("/create", async (req, res) => {
 router.get("/edit", isAuthorized, async (req, res) => {
   const id = req.query.id;
   const product = await getProduct(id);
-  res.render("product/edit", { product });
+  const role = req.session.user ? req.session.user.role : "";
+
+  res.render("product/edit", { product, role });
 });
 
 router.post("/edit", async (req, res) => {
@@ -65,9 +69,9 @@ router.post("/delete", async (req, res) => {
 
 router.post("/search", async (req, res) => {
   const search = `search=${req.body.search}`;
-  const category = `category=${req.body.category}`
+  const category = `category=${req.body.category}`;
 
-    res.redirect(`/?${search}&${category}`);
+  res.redirect(`/?${search}&${category}`);
 });
 
 export default router;

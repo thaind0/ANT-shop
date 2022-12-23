@@ -14,7 +14,7 @@
     {{#ifEquals role "admin" }}
     <a href="/product/create">
       <div
-        class="flex flex-col items-center justify-center p-3 text-blue-500 scale-100 hover:scale-110 transition-all duration-300">
+        class="flex flex-col items-center justify-center text-blue-500 scale-100 hover:scale-110 transition-all duration-300">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
           class="w-24 h-24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -25,7 +25,7 @@
       </div>
     </a>
     {{/ifEquals}}
-    <form action="/product/search" method="post" class="flex flex-row items-center justify-center gap-4 p-3">
+    <form action="/product/search" method="post" class="flex flex-row items-center justify-center gap-4 py-3">
       <input class="bg-slate-50 hover:bg-slate-100 text-slate-800 font-medium py-2 px-4 rounded w-1/2" type="text"
         name="search" placeholder="Search" value="{{#if search}}{{search}}{{/if}}" />
       <select class="bg-slate-50 hover:bg-slate-100 text-slate-800 font-medium py-2 px-4 rounded w-1/4" name="category"

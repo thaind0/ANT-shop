@@ -24,7 +24,6 @@ export const registerUser = async (user) => {
 
 export const loginUser = async (username, password) => {
   const user = await findUser(username);
-  console.log(password, user);
   if (user) {
     const match = await bcrypt.compare(password, user.password);
     if (match) {
@@ -38,6 +37,6 @@ export const isAuthorized = (req, res, next) => {
   if (req.session.user) {
     next();
   } else {
-    res.redirect("/login");
+    res.redirect("/user/login");
   }
 };

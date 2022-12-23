@@ -10,7 +10,7 @@ const getDB = async () => {
     const client = await MongoClient.connect(url);
     return client.db(dbName);
   } catch (error) {
-    console.log("Error connecting to DB", error);
+    console.warn("Error connecting to DB", error);
   }
 };
 

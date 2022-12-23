@@ -4,6 +4,7 @@ import { registerUser, loginUser } from "../controllers/userController.js";
 const router = express.Router();
 
 router.get("/register", (req, res) => {
+
   res.render("user/register");
 });
 
@@ -38,9 +39,9 @@ router.get("/login", (req, res) => {
 
 router.post("/login", async (req, res) => {
   const user = await loginUser(req.body.username, req.body.password);
-  console.log(user);
   if (user) {
     req.session.user = user;
+    req.session.save();
     res.redirect("/");
   } else {
     res.render("user/login", { error: "Invalid username or password" });
