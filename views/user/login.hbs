@@ -1,0 +1,30 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/tailwind.css" />
+  <title>Login</title>
+</head>
+
+<body>
+  {{> header}}
+  <div class="container">
+    <form action="login" method="post"
+      class="w-1/2 mx-auto mt-10 bg-slate-50 p-4 rounded-lg shadow-lg flex flex-col gap-4 text-slate-800 font-medium">
+      <input class="bg-slate-50 hover:bg-slate-100 text-slate-800 font-medium py-2 px-4 rounded" type="text"
+        name="username" placeholder="Username" required />
+      <input class="bg-slate-50 hover:bg-slate-100 text-slate-800 font-medium py-2 px-4 rounded" type="password"
+        name="password" placeholder="Password" required />
+      <span class="text-red-500">{{error}}</span>
+      <div>
+        <a href="/user/register" class="text-blue-500">Register</a>
+      </div>
+      <input type="submit" value="Login"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-1/2 mx-auto" />
+    </form>
+  </div>
+</body>
+
+</html>

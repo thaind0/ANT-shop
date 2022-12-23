@@ -7,16 +7,19 @@ import {
   updateProduct,
   deleteProduct,
 } from "../controllers/productController.js";
+import { isAuthorized } from "../controllers/userController.js";
+
 const router = express.Router();
 
 router.get("/", async (req, res) => {
   const id = req.query.id;
   const product = await getProduct(id);
+  const role = req.session.user ? req.session.user.role : "";
   console.log(product);
-  res.render("product/index", { product });
+  res.render("product/index", { product, role });
 });
 
-router.get("/create", (req, res) => {
+router.get("/create", isAuthorized, (req, res) => {
   res.render("product/create");
 });
 
@@ -32,7 +35,7 @@ router.post("/create", async (req, res) => {
   res.redirect(`/product/?id=${id}`);
 });
 
-router.get("/edit", async (req, res) => {
+router.get("/edit",isAuthorized, async (req, res) => {
   const id = req.query.id;
   const product = await getProduct(id);
   res.render("product/edit", { product });

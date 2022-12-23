@@ -19,6 +19,7 @@
       <h1 class="text-2xl font-bold">Name: {{product.name}}</h1>
       <p class="text-xl font-medium">Price: {{product.price}}</p>
       <p class="text-xl font-medium">Category: {{product.category}}</p>
+      {{#ifEquals role "admin" }}
       <div class="flex flex-row gap-4">
         <a href="/product/edit?id={{product._id}}">
           <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
@@ -32,6 +33,7 @@
           </button>
         </form>
       </div>
+      {{/ifEquals}}
     </div>
   </div>
 </body>

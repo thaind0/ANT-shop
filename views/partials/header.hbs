@@ -4,11 +4,19 @@
             <a href="/" class="text-4xl font-bold">ANT toy shop</a>
         </div>
         <div class="flex flex-row items-center justify-center gap-4">
-            <a href="/product/create">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            {{#if role}}
+            <a href="/user/logout">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all">
+                    Logout
+                </button>
+            </a>
+            {{else}}
+            <a href="/user/login">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all">
                     Login
                 </button>
             </a>
+            {{/if}}
         </div>
     </div>
 </header>
