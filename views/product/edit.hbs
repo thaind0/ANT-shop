@@ -1,0 +1,36 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/tailwind.css" />
+    <title>Edit{{product.name}}</title>
+</head>
+
+<body>
+    {{> header}}
+    <div class="container">
+        <form action="edit" method="post"
+            class="w-1/2 mx-auto mt-10 bg-slate-50 p-4 rounded-lg shadow-lg flex flex-col gap-2 text-slate-800 font-medium">
+            <img src="{{product.image}}" alt="{{product.name}}" class="max-h-60 object-contain">
+            <input type="hidden" name="id" value="{{product._id}}" required />
+            <input type="text" name="name" placeholder="Name" value="{{product.name}}" required />
+            <input type="text" name="price" placeholder="Price" value="{{product.price}}" required />
+            <select name="category" required>
+                <option value="action">Action</option>
+                <option value="adventure">Adventure</option>
+                <option value="racing">Racing</option>
+                <option value="shooter">Shooter</option>
+                <option value="strategy">Strategy</option>
+                <option value="sports">Sports</option>
+            </select>
+            <input type="text" name="image" placeholder="Image URL" value="{{product.image}}" />
+            <input type="submit" value="Edit Product"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-1/2 mx-auto" />
+
+        </form>
+    </div>
+</body>
+
+</html>

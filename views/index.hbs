@@ -1,49 +1,35 @@
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/tailwind.css" />
-    <title>ANT toy shop</title>
-  </head>
-  <body class="flex flex-col">
-    <header class="flex flex-row items-center justify-between p-3 shadow">
-      <div class="flex flex-col">
-        <h1 class="text-4xl font-bold">ANT toy shop</h1>
-      </div>
-      <div class="flex flex-row items-center justify-center gap-4">
-        <a href="/product/create">
-          <button
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            New Product
-          </button>
-        </a>
-      </div>
-      <div class="flex flex-col">
-        {{! <a href="/cart" class="text-sm">Cart</a>
-        <a href="/login" class="text-sm">Login</a> }}
-      </div>
-      <div>
-    </header>
-    <div class="container">
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-{{#each products}}
-<a href="/product/?id={{_id}}">
-  <div class="flex flex-col items-center justify-between p-3 shadow">
-    <div class="flex flex-col">
-      <img src="{{image}}" alt="{{name}}" />
-      </div>
-      <div class="flex flex-col">
-        <h1 class="text-2xl font-bold">{{name}}</h1>
-        <p class="text-xl font-medium">{{price}}</p>
-        <p class="text-xl font-medium">{{category}}</p>
-        </div>
-      </div>
-</a>
-{{/each}}
-    </div>
-    </div>
 
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/tailwind.css" />
+  <title>ANT toy shop</title>
+</head>
+
+<body class="flex flex-col">
+  {{> header}}
+  <div class="container">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      {{#each products}}
+      <a href="/product/?id={{_id}}">
+        <div
+          class="flex flex-col items-center justify-between p-3 shadow-sm rounded-md hover:rounded-2xl hover:shadow-xl scale-100 hover:scale-110 transition-all duration-300">
+          <div class="flex flex-col">
+            <img src="{{image}}" alt="{{name}}" />
+          </div>
+          <div class="flex flex-col">
+            <h1 class="text-2xl font-bold">{{name}}</h1>
+            <p class="text-xl font-medium">${{price}}</p>
+            <p class="text-xl font-medium">{{category}}</p>
+          </div>
+        </div>
+      </a>
+      {{/each}}
+    </div>
+  </div>
+
+</body>
+
 </html>

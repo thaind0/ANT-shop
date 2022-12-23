@@ -4,6 +4,8 @@ import {
   getProducts,
   getProduct,
   createProduct,
+  updateProduct,
+  deleteProduct,
 } from "../controllers/productController.js";
 const router = express.Router();
 
@@ -28,6 +30,33 @@ router.post("/create", async (req, res) => {
   const id = (await createProduct(product)).insertedId.toString();
   //   id as query string
   res.redirect(`/product/?id=${id}`);
+});
+
+router.get("/edit", async (req, res) => {
+  const id = req.query.id;
+  const product = await getProduct(id);
+  res.render("product/edit", { product });
+});
+
+router.post("/edit", async (req, res) => {
+  const id = req.body.id;
+  const product = new Product();
+  product.name = req.body.name;
+  product.category = req.body.category;
+  product.price = req.body.price;
+  product.image = req.body.image;
+
+  await updateProduct(id, product);
+  res.redirect(`/product/?id=${id}`);
+});
+
+router.post("/delete", async (req, res) => {
+  const id = req.body.id;
+  if (id) {
+    await deleteProduct(id);
+  }
+
+  res.redirect("/");
 });
 
 export default router;
