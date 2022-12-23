@@ -5,7 +5,11 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 
 import { PORT, SECRET, SESS_EXPIRY } from "./config.js";
-import { getProducts } from "./controllers/productController.js";
+import {
+  getProducts,
+  getCategories,
+  getProductsBySearch,
+} from "./controllers/productController.js";
 import productRouter from "./routers/productRouter.js";
 import userRouter from "./routers/userRouter.js";
 
@@ -15,8 +19,8 @@ const __dirname = dirname(__filename);
 const app = express();
 
 hbs.registerPartials(__dirname + "/views/partials");
-hbs.registerHelper('ifEquals', function(arg1, arg2, options) {
-  return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+hbs.registerHelper("ifEquals", function (arg1, arg2, options) {
+  return arg1 == arg2 ? options.fn(this) : options.inverse(this);
 });
 
 app.set("view engine", "hbs");
@@ -32,10 +36,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.get("/", async (req, res) => {
-  const products = await getProducts();
   const role = req.session.user ? req.session.user.role : "";
+  const categories = await getCategories();
+  const category = req.query.category || "";
+  const search = req.query.search || "";
+  let products;
 
-  res.render("index", { products, role });
+  if (category || search) {
+    products = await getProductsBySearch(category, search);
+  } else {
+    products = await getProducts();
+  }
+
+  res.render("index", { products, role, categories, search, category });
 });
 
 app.use("/product", productRouter);

@@ -20,7 +20,6 @@ export const createProduct = async (product) => {
     const collection = await getProductCollection();
     const id = await collection.insertOne(product);
     return id;
-    
   } catch (error) {
     console.warn("Error creating product", error);
   }
@@ -34,4 +33,19 @@ export const updateProduct = async (id, product) => {
 export const deleteProduct = async (id) => {
   const collection = await getProductCollection();
   await collection.deleteOne({ _id: ObjectId(id) });
+};
+
+export const getCategories = async () => {
+  const collection = await getProductCollection();
+  return await collection.distinct("category");
+};
+
+export const getProductsBySearch = async (category, search) => {
+  const collection = await getProductCollection();
+  return await collection
+    .find({
+      name: { $regex: search, $options: "i" },
+      category: { $regex: category === "all" ? "" : category, $options: "i" },
+    })
+    .toArray();
 };

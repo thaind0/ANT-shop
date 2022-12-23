@@ -6,6 +6,7 @@ import {
   createProduct,
   updateProduct,
   deleteProduct,
+  getCategories,
 } from "../controllers/productController.js";
 import { isAuthorized } from "../controllers/userController.js";
 
@@ -35,7 +36,7 @@ router.post("/create", async (req, res) => {
   res.redirect(`/product/?id=${id}`);
 });
 
-router.get("/edit",isAuthorized, async (req, res) => {
+router.get("/edit", isAuthorized, async (req, res) => {
   const id = req.query.id;
   const product = await getProduct(id);
   res.render("product/edit", { product });
@@ -60,6 +61,13 @@ router.post("/delete", async (req, res) => {
   }
 
   res.redirect("/");
+});
+
+router.post("/search", async (req, res) => {
+  const search = `search=${req.body.search}`;
+  const category = `category=${req.body.category}`
+
+    res.redirect(`/?${search}&${category}`);
 });
 
 export default router;
