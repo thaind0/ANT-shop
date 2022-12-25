@@ -30,17 +30,11 @@
         name="search" placeholder="Search" value="{{#if search}}{{search}}{{/if}}" />
       <select class="bg-slate-50 hover:bg-slate-100 text-slate-800 font-medium py-2 px-4 rounded w-1/4" name="category"
         id="category" onchange="this.form.submit()">
-        {{#ifEquals category "all" }}
         <option value="all" selected>All</option>
-        {{else}}
-        <option value="all">All</option>
-        {{/ifEquals}}
         {{#each categories}}
-        {{#ifEquals ../category this}}
-        <option value="{{this}}" selected>{{this}}</option>
-        {{else}}
-        <option value="{{this}}">{{this}}</option>
-        {{/ifEquals}}
+        <option value="{{this}}" {{#ifEquals ../category this}}selected{{/ifEquals}}>{{
+          toCapitalize this
+          }}</option>
         {{/each}}
       </select>
       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-1/4 mx-auto"

@@ -19,8 +19,11 @@ const __dirname = dirname(__filename);
 const app = express();
 
 hbs.registerPartials(__dirname + "/views/partials");
-hbs.registerHelper("ifEquals",  (arg1, arg2, options)=> {
+hbs.registerHelper("ifEquals", (arg1, arg2, options) => {
   return arg1 == arg2 ? options.fn(this) : options.inverse(this);
+});
+hbs.registerHelper("toCapitalize", (str) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
 });
 
 app.set("view engine", "hbs");
