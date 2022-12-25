@@ -8,7 +8,7 @@ import {
   deleteProduct,
   getCategories,
 } from "../controllers/productController.js";
-import { isAuthorized } from "../controllers/userController.js";
+import { isAdmin } from "../controllers/userController.js";
 
 const router = express.Router();
 
@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
   res.render("product/index", { product, role });
 });
 
-router.get("/create", isAuthorized, (req, res) => {
+router.get("/create", isAdmin, (req, res) => {
   const role = req.session.user ? req.session.user.role : "";
 
   res.render("product/create", { role });
@@ -38,7 +38,7 @@ router.post("/create", async (req, res) => {
   res.redirect(`/product/?id=${id}`);
 });
 
-router.get("/edit", isAuthorized, async (req, res) => {
+router.get("/edit", isAdmin, async (req, res) => {
   const id = req.query.id;
   const product = await getProduct(id);
   const role = req.session.user ? req.session.user.role : "";
@@ -58,7 +58,7 @@ router.post("/edit", async (req, res) => {
   res.redirect(`/product/?id=${id}`);
 });
 
-router.post("/delete", async (req, res) => {
+router.post("/delete", isAdmin, async (req, res) => {
   const id = req.body.id;
   if (id) {
     await deleteProduct(id);

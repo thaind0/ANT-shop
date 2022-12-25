@@ -9,7 +9,8 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "build": "npx tailwindcss -i public/main.css -o public/tailwind.css --watch"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",

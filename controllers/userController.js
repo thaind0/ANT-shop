@@ -33,8 +33,8 @@ export const loginUser = async (username, password) => {
   return null;
 };
 
-export const isAuthorized = (req, res, next) => {
-  if (req.session.user) {
+export const isAdmin = (req, res, next) => {
+  if (req.session.user && req.session.user.role === "admin") {
     next();
   } else {
     res.redirect("/user/login");
