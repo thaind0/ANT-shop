@@ -19,10 +19,10 @@ const __dirname = dirname(__filename);
 const app = express();
 
 hbs.registerPartials(__dirname + "/views/partials");
-hbs.registerHelper("ifEquals", (arg1, arg2, options) => {
+hbs.registerHelper("ifEquals", function (arg1, arg2, options) {
   return arg1 == arg2 ? options.fn(this) : options.inverse(this);
 });
-hbs.registerHelper("toCapitalize", (str) => {
+hbs.registerHelper("toCapitalize", function (str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 });
 
@@ -58,5 +58,5 @@ app.use("/product", productRouter);
 app.use("/user", userRouter);
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port http://localhost:${PORT}`);
 });
